@@ -1,4 +1,5 @@
-﻿using Employee_Management_System.Models;
+﻿using System.Reflection.Emit;
+using Employee_Management_System.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +10,23 @@ namespace Employee_Management_System.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
+        }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<LeaveApplication>()
+                .HasOne(l => l.Duration)
+                 .WithMany()
+                .HasForeignKey(l => l.DurationId)
+                 .OnDelete(DeleteBehavior.Restrict); 
+
+            builder.Entity<LeaveApplication>()
+                .HasOne(l => l.Status)
+                .WithMany()
+                .HasForeignKey(l => l.StatusId)
+                .OnDelete(DeleteBehavior.Restrict); 
+        
         }
         public DbSet<Employee> Employees { get; set; }
 
@@ -25,5 +43,8 @@ namespace Employee_Management_System.Data
         public DbSet<Country> Countries { get; set; }
 
         public DbSet<City> Cities { get; set; }
+        public DbSet<LeaveApplication> LeaveApplications {get; set; }
+
+
     }
 }
