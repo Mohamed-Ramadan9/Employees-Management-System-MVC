@@ -1,0 +1,25 @@
+## Ignore Visual Studio files
+.vs/
+*.user
+*.suo
+
+## Ignore build results
+bin/
+obj/
+
+## Ignore logs
+*.log
+
+## Ignore user secrets (if any)
+secrets.json
+
+## Ignore environment-specific config
+appsettings.Development.json
+
+## Ignore system files
+Thumbs.db
+.DS_Store
+
+## Ignore temp files
+*.tmp
+*.bak
